@@ -1,0 +1,21 @@
+{
+  "name" : "obb.achievements",
+  "version" : "0.0.1",
+  "main" : "./achievements.js",
+  "private" : false,
+  "scripts" : {
+    "test" : "./node_modules/.bin/mocha --recursive --reporter spec --check-leaks"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/orionsbelt-battlegrounds/achievements.git"
+  },
+  "dependencies" : {
+    "underscore" : "*"
+  },
+  "devDependencies" : {
+    "mocha" : "*",
+    "expect.js" : "*",
+    "browserify" : "*"
+  }
+}
