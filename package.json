@@ -4,7 +4,8 @@
   "main" : "./achievements.js",
   "private" : false,
   "scripts" : {
-    "test" : "./node_modules/.bin/mocha --recursive --reporter spec --check-leaks"
+    "test" : "./node_modules/.bin/mocha --recursive --reporter spec --check-leaks",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec --recursive && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type" : "git",
@@ -16,6 +17,9 @@
   "devDependencies" : {
     "mocha" : "*",
     "expect.js" : "*",
-    "browserify" : "*"
+    "browserify" : "*",
+    "coveralls": "*",
+    "istanbul": "*",
+    "mocha-lcov-reporter": "*"
   }
 }
