@@ -14,6 +14,18 @@ module.exports.processBattleBadges = function processBattleBadges(path, player) 
 	  
 }
 
+module.exports.processTurnBadges = function processTurnBadges(path, player) {
+
+	var badges = [];
+
+	fs.readdir('./'+ path, function (err, files) { 
+
+		processBadges(err, files, path, player, badges);
+	  addNewTurnBadgesToPlayer(player, badges);
+	});
+	  
+}
+
 function processBadges(err, files, path, player, badges){
 	  if (err) {
   	throw new Error("Invalid path.");
@@ -37,6 +49,14 @@ function addNewBattleBadgesToPlayer(player, badges) {
 	_.each(badges, function invokeProcessor(badge) {
 		if(player.badges.battle !== undefined){
 			player.badges.battle[badge] = true;
+		}
+  });
+}
+
+function addNewTurnBadgesToPlayer(player, badges) {
+	_.each(badges, function invokeProcessor(badge) {
+		if(player.badges.turn !== undefined){
+			player.badges.turn[badge] = true;
 		}
   });
 }
