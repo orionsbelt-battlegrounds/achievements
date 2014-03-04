@@ -1,5 +1,5 @@
 var assert = require('assert');
-var firstVictory = require('./../../src/achievements/firstVictory');
+var firstVictory = require('./../../src/achievements/Battle/firstVictory');
 var initPlayer = require('./../../src/initPlayer');
 
 describe("achievements.firstVictory", function() {

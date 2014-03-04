@@ -12,7 +12,7 @@ module.exports = function(battleStats, player) {
     player.statistics.battles.defeats += 1;
   }
 
-  processBadges(player)
+  processBadges.processBattleBadges(player)
 
 
 }
