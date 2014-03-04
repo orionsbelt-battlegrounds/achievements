@@ -1,5 +1,6 @@
 var initPlayer = require('./../src/initPlayer.js');
 var processBadges = require('./../src/processBadges.js');
+var BATTLE_PATH = "src/achievements/Battle/";
 
 module.exports = function(battleStats, player) {
   initPlayer(player);
@@ -12,7 +13,7 @@ module.exports = function(battleStats, player) {
     player.statistics.battles.defeats += 1;
   }
 
-  processBadges.processBattleBadges(player)
+  processBadges.processBattleBadges(BATTLE_PATH, player)
 
 
 }

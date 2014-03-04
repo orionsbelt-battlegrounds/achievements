@@ -1,10 +1,24 @@
 var obbAchievements = require("./../achievements");
 var assert = require("assert");
+var domain = require("domain");
+
+var BATTLE_PATH = "src/achievements/Battle/";
+
+var d = domain.create();
+d.on('error', function(er) {
+  assert(er.message === "Invalid path.");
+});
 
 describe("processBattleBadges", function testProcessBattles() {
 
   it("is available", function() {
     assert(obbAchievements.processBadges);
+  })
+
+  it("path error", function() {
+    d.run(function() {
+      obbAchievements.processBadges.processBattleBadges("benfica",null);
+    });
   })
 
   it("process 1 victory badge", function() {
@@ -19,15 +33,18 @@ describe("processBattleBadges", function testProcessBattles() {
           }
         },
         badges :{
-          FirstVictory : false,
-          AnnihilationVictories10 : false
+          battle : [],
+          turn : []
         }
       };
 
-      obbAchievements.processBadges.processBattleBadges(player,function() {
-        assert.equal(player.badges.FirstVictory, true)
-        assert.equal(player.badges.AnnihilationVictories10, false)
+      obbAchievements.processBadges.processBattleBadges(BATTLE_PATH,player,function() {
+        assert.equal(player.badges.battle[FirstVictory], true)
+        assert.equal(player.badges.battle[AnnihilationVictories10], false)
       });
        
     })
 })
+
+
+
