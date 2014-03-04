@@ -42,8 +42,8 @@ describe("processBadges", function testProcessBattles() {
       };
 
       obbAchievements.processBadges.processBattleBadges(BATTLE_PATH,player,function() {
-        assert.equal(player.badges.battle[FirstVictory], true)
-        assert.equal(player.badges.battle[AnnihilationVictories10], false)
+        assert.equal(player.badges.battle['FirstVictory'], true);
+        assert.equal(player.badges.battle['AnnihilationVictories10'], undefined);
       });
     })
 
@@ -62,8 +62,8 @@ describe("processBadges", function testProcessBattles() {
       };
 
       obbAchievements.processBadges.processTurnBadges(TURN_PATH,player,function() {
-        assert.equal(player.badges.turn['DoomerLoverLevel1'], true)
-        assert.equal(player.badges.turn['DoomerDestroyerLevel1'], undefined)
+        assert.equal(player.badges.turn['DoomerLoverLevel1'], true);
+        assert.equal(player.badges.turn['DoomerDestroyerLevel1'], undefined);
       });
     })
 })

@@ -10,6 +10,7 @@ module.exports.processBattleBadges = function processBattleBadges(path, player, 
     if(err) { callback(err); return; }
     processBadges(files, path, player, badges);
     addNewBattleBadgesToPlayer(player, badges);
+    if(callback) { callback(null); }
   });
 
 }
@@ -22,7 +23,7 @@ module.exports.processTurnBadges = function processTurnBadges(path, player, call
     if(err) { callback(err); return; }
     processBadges(files, path, player, badges);
     addNewTurnBadgesToPlayer(player, badges);
-    callback(null);
+    if(callback) { callback(null); }
   });
 
 }
