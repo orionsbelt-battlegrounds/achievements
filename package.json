@@ -16,6 +16,7 @@
   "devDependencies" : {
     "mocha" : "*",
     "expect.js" : "*",
-    "browserify" : "*"
+    "browserify" : "*",
+    "domain" : "*"
   }
 }
