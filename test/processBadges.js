@@ -1,10 +1,25 @@
 var obbAchievements = require("./../achievements");
 var assert = require("assert");
+var domain = require("domain");
 
-describe("processBattleBadges", function testProcessBattles() {
+var BATTLE_PATH = "src/achievements/Battle/";
+var TURN_PATH = "src/achievements/Turn/";
+
+var d = domain.create();
+d.on('error', function(er) {
+  assert(er.message === "Invalid path.");
+});
+
+describe("processBadges", function testProcessBattles() {
 
   it("is available", function() {
     assert(obbAchievements.processBadges);
+  })
+
+  it("path error", function() {
+    d.run(function() {
+      obbAchievements.processBadges.processBattleBadges("benfica",null);
+    });
   })
 
   it("process 1 victory badge", function() {
@@ -19,15 +34,39 @@ describe("processBattleBadges", function testProcessBattles() {
           }
         },
         badges :{
-          FirstVictory : false,
-          AnnihilationVictories10 : false
+          battle : [],
+          turn : []
         }
       };
 
-      obbAchievements.processBadges.processBattleBadges(player,function() {
-        assert.equal(player.badges.FirstVictory, true)
-        assert.equal(player.badges.AnnihilationVictories10, false)
+      obbAchievements.processBadges.processBattleBadges(BATTLE_PATH,player,function() {
+        assert.equal(player.badges.battle[FirstVictory], true)
+        assert.equal(player.badges.battle[AnnihilationVictories10], false)
+      });
+       
+    })
+
+  it("process doomer lover level 1 badge", function() {
+      var player = { 
+        statistics : {
+          units : {
+            doomerDestroyed : 10,
+            doomerDamage: 10000
+          }
+        },
+        badges :{
+          battle : [],
+          turn : []
+        }
+      };
+
+      obbAchievements.processBadges.processTurnBadges(TURN_PATH,player,function() {
+        assert.equal(player.badges.turn[DoomerLoverLevel1], true)
+        assert.equal(player.badges.turn[DoomerDestroyerLevel1], false)
       });
        
     })
 })
+
+
+
