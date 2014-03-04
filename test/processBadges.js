@@ -5,10 +5,12 @@ var domain = require("domain");
 var BATTLE_PATH = "src/achievements/Battle/";
 var TURN_PATH = "src/achievements/Turn/";
 
+/*
 var d = domain.create();
 d.on('error', function(er) {
   assert.equal(er.message, "Invalid path.");
 });
+*/
 
 describe("processBadges", function testProcessBattles() {
 
@@ -17,8 +19,8 @@ describe("processBadges", function testProcessBattles() {
   })
 
   it("throws exception on path error", function() {
-    d.run(function() {
-      obbAchievements.processBadges.processBattleBadges("benfica",null);
+    obbAchievements.processBadges.processBattleBadges("benfica",null, function(err) {
+      assert(err);
     });
   })
 
@@ -60,8 +62,8 @@ describe("processBadges", function testProcessBattles() {
       };
 
       obbAchievements.processBadges.processTurnBadges(TURN_PATH,player,function() {
-        assert.equal(player.badges.turn[DoomerLoverLevel1], true)
-        assert.equal(player.badges.turn[DoomerDestroyerLevel1], false)
+        assert.equal(player.badges.turn['DoomerLoverLevel1'], true)
+        assert.equal(player.badges.turn['DoomerDestroyerLevel1'], undefined)
       });
     })
 })

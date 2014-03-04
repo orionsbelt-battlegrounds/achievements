@@ -2,32 +2,32 @@
 var _ = require('underscore');
 var fs = require('fs');
 
-module.exports.processBattleBadges = function processBattleBadges(path, player) {
+module.exports.processBattleBadges = function processBattleBadges(path, player, callback) {
 
   var badges = [];
 
   fs.readdir('./'+ path, function (err, files) { 
-    processBadges(err, files, path, player, badges);
+    if(err) { callback(err); return; }
+    processBadges(files, path, player, badges);
     addNewBattleBadgesToPlayer(player, badges);
   });
 
 }
 
-module.exports.processTurnBadges = function processTurnBadges(path, player) {
+module.exports.processTurnBadges = function processTurnBadges(path, player, callback) {
 
   var badges = [];
 
   fs.readdir('./'+ path, function (err, files) { 
-    processBadges(err, files, path, player, badges);
+    if(err) { callback(err); return; }
+    processBadges(files, path, player, badges);
     addNewTurnBadgesToPlayer(player, badges);
+    callback(null);
   });
 
 }
 
-function processBadges(err, files, path, player, badges){
-  if (err) {
-    throw new Error("Invalid path.");
-  }
+function processBadges(files, path, player, badges, callback){
   var badgeProcessors = [];
   files.forEach( function (file) {
     badgeProcessors.push(require("./../"+path+file));
