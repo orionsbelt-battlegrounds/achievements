@@ -4,60 +4,58 @@ var fs = require('fs');
 
 module.exports.processBattleBadges = function processBattleBadges(path, player) {
 
-	var badges = [];
+  var badges = [];
 
-	fs.readdir('./'+ path, function (err, files) { 
+  fs.readdir('./'+ path, function (err, files) { 
+    processBadges(err, files, path, player, badges);
+    addNewBattleBadgesToPlayer(player, badges);
+  });
 
-		processBadges(err, files, path, player, badges);
-	  addNewBattleBadgesToPlayer(player, badges);
-	});
-	  
 }
 
 module.exports.processTurnBadges = function processTurnBadges(path, player) {
 
-	var badges = [];
+  var badges = [];
 
-	fs.readdir('./'+ path, function (err, files) { 
+  fs.readdir('./'+ path, function (err, files) { 
+    processBadges(err, files, path, player, badges);
+    addNewTurnBadgesToPlayer(player, badges);
+  });
 
-		processBadges(err, files, path, player, badges);
-	  addNewTurnBadgesToPlayer(player, badges);
-	});
-	  
 }
 
 function processBadges(err, files, path, player, badges){
-	  if (err) {
-  	throw new Error("Invalid path.");
+  if (err) {
+    throw new Error("Invalid path.");
   }
-	var badgeProcessors = [];
-	files.forEach( function (file) {
-		badgeProcessors.push(require("./../"+path+file));
-	});
+  var badgeProcessors = [];
+  files.forEach( function (file) {
+    badgeProcessors.push(require("./../"+path+file));
+  });
 
   _.each(badgeProcessors, function invokeProcessor(processor) {
     var result = processor(player);
-    
+
     if(result.success) {
-  		//console.log(result.badge);
+      //console.log(result.badge);
       badges.push(result.badge);
     }
   });
 }
 
 function addNewBattleBadgesToPlayer(player, badges) {
-	_.each(badges, function invokeProcessor(badge) {
-		if(player.badges.battle !== undefined){
-			player.badges.battle[badge] = true;
-		}
+  _.each(badges, function invokeProcessor(badge) {
+    if(player.badges.battle !== undefined){
+      player.badges.battle[badge] = true;
+    }
   });
 }
 
 function addNewTurnBadgesToPlayer(player, badges) {
-	_.each(badges, function invokeProcessor(badge) {
-		if(player.badges.turn !== undefined){
-			player.badges.turn[badge] = true;
-		}
+  _.each(badges, function invokeProcessor(badge) {
+    if(player.badges.turn !== undefined){
+      player.badges.turn[badge] = true;
+    }
   });
 }
 

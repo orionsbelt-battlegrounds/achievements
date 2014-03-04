@@ -7,7 +7,7 @@ var TURN_PATH = "src/achievements/Turn/";
 
 var d = domain.create();
 d.on('error', function(er) {
-  assert(er.message === "Invalid path.");
+  assert.equal(er.message, "Invalid path.");
 });
 
 describe("processBadges", function testProcessBattles() {
@@ -16,7 +16,7 @@ describe("processBadges", function testProcessBattles() {
     assert(obbAchievements.processBadges);
   })
 
-  it("path error", function() {
+  it("throws exception on path error", function() {
     d.run(function() {
       obbAchievements.processBadges.processBattleBadges("benfica",null);
     });
@@ -43,7 +43,6 @@ describe("processBadges", function testProcessBattles() {
         assert.equal(player.badges.battle[FirstVictory], true)
         assert.equal(player.badges.battle[AnnihilationVictories10], false)
       });
-       
     })
 
   it("process doomer lover level 1 badge", function() {
@@ -64,7 +63,6 @@ describe("processBadges", function testProcessBattles() {
         assert.equal(player.badges.turn[DoomerLoverLevel1], true)
         assert.equal(player.badges.turn[DoomerDestroyerLevel1], false)
       });
-       
     })
 })
 

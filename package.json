@@ -18,7 +18,7 @@
     "mocha" : "*",
     "expect.js" : "*",
     "browserify" : "*",
-    "domain" : "*"
+    "domain" : "*",
     "coveralls": "*",
     "istanbul": "*",
     "mocha-lcov-reporter": "*"
