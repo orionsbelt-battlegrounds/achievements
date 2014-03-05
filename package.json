@@ -21,6 +21,7 @@
     "domain" : "*",
     "coveralls": "*",
     "istanbul": "*",
-    "mocha-lcov-reporter": "*"
+    "mocha-lcov-reporter": "*",
+    "node-inspector": "*"
   }
 }
