@@ -1,5 +1,5 @@
 {
-  "name" : "obb.achievements",
+  "name" : "obb-achievements",
   "version" : "0.0.1",
   "main" : "./achievements.js",
   "private" : false,
